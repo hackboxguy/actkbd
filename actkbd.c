@@ -9,7 +9,7 @@
  */
 
 #include "actkbd.h"
-
+#define ACTKBDVERSION "00.01" //TODO: get version as compiler definition"
 
 /* Verbosity level */
 int verbose = 0;
@@ -60,7 +60,7 @@ static int usage() {
 	"        -x, --showexec          Report executed commands\n"
 	"        -s, --showkey           Report key presses\n"
 	"        -l, --syslog            Use the syslog facilities for logging\n"
-    , VERSION);
+    , ACTKBDVERSION);
 
     return OK;
 }
@@ -105,7 +105,7 @@ void on_term(int signum) {
     free_ign_mask();
 
     if (detach)
-	lprintf("actkbd %s terminating for %s\n", VERSION, device);
+	lprintf("actkbd %s terminating for %s\n", ACTKBDVERSION, device);
 
     closelog();
 
@@ -258,7 +258,7 @@ int main(int argc, char **argv) {
 	    "This program is distributed in the hope that it will be useful, but WITHOUT\n"
 	    "ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS\n"
 	    "FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.\n"
-	, VERSION);
+	, ACTKBDVERSION);
 	return OK;
     }
     if (quiet && !detach) {
@@ -303,7 +303,7 @@ int main(int argc, char **argv) {
     		lprintf("%s: fork() error: %s\n", argv[0], strerror(errno));
     		return FORKERR;
 	}
-	lprintf("actkbd %s launched for %s\n", VERSION, device);
+	lprintf("actkbd %s launched for %s\n", ACTKBDVERSION, device);
     }
 
     if (pidfile != NULL)
